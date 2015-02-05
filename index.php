@@ -1,6 +1,7 @@
 <?php
 
 include './core/Config.php';
+include './core/View.php';
 
 $requestURI = array_filter(explode('/', $_SERVER['REQUEST_URI']));
 $scriptName = array_filter(explode('/', $_SERVER['SCRIPT_NAME']));
@@ -18,7 +19,7 @@ if($route) {
     require './src/controllers/' . $route['controller'] . '.php';
 
     $controller = new $route['controller'];
-    $controller->$route['method']();
+    call_user_func_array(array($controller, $route['method']), $parameters);
 } else {
     die('404');
 }
