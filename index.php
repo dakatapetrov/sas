@@ -15,7 +15,10 @@ $config = Config::getInstance();
 $route  = $config->getRoute($route);
 
 if($route) {
-    var_dump($route);
+    require './src/controllers/' . $route['controller'] . '.php';
+
+    $controller = new $route['controller'];
+    $controller->$route['method']();
 } else {
     die('404');
 }
