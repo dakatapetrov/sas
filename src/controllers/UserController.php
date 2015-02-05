@@ -2,9 +2,8 @@
 
 class UserController
 {
-    public function register()
+    public function register($name, $bla)
     {
-        echo 'Here you should register';
-        return 42;
+        return View::getInstance()->render('register', array('name' => $name, 'bla' => $bla));
     }
 }
