@@ -11,7 +11,7 @@ function generateOptions($options, $selectedOption) {
 }
 ?>
 
-<h1>Your rankings, sir!</h1>
+<h1>Вашата класация, господарю!</h1>
 
 <form name="search" action="/sas/ranking" method="POST">
 <img src="/sas/src/public/img/glyphicons/glyphicons_263_bank.png">
@@ -39,7 +39,7 @@ generateOptions($locals['specialities'], $locals['selectedSpeciality']);
 /* generateOptions($locals['intervals'], $locals['selectedIntervals']); */
 ?>
 </select>
-<input type="submit" value="Submit">
+<input type="submit" value="Покажи">
 </form>
 
 <table id="ranking">
