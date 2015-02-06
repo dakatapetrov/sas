@@ -10,7 +10,7 @@
 <body>
     <div id="header">
       <ul class="nav-fade">
-      <li><a href=""><img src="/sas/src/public/img/glyphicons/glyphicons_043_group_white.png">Класация</a></li>
+      <li><a href="/sas/ranking"><img src="/sas/src/public/img/glyphicons/glyphicons_043_group_white.png">Класация</a></li>
       <li><a href=""><img src="/sas/src/public/img/glyphicons/glyphicons_041_charts_white.png">Сравни</a></li>
       <li><a href=""><img src="/sas/src/public/img/glyphicons/glyphicons_003_user_white.png">Профил</a></li>
       </ul>
