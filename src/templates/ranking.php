@@ -31,7 +31,7 @@ generateOptions($locals['specialities'], $locals['selectedSpeciality']);
 <img src="/sas/src/public/img/glyphicons/glyphicons_045_calendar.png">
 Период:
 <select name="interval">
-    <option value=\"0\">---</option>
+    <option value="0">---</option>
     <option value="day">За деня</option>
     <option value="week">За седмицата</option>
     <option value="month">За месеца</option>
@@ -57,7 +57,7 @@ foreach ($locals['students'] as $key => $student) {
     /* } else { */
         echo "<td>" . ($key+1) . "</td>";
     /* } */
-    echo "<td>" . $student['name'] . "</td>";
+    echo "<td><a href=\"#\" class=\"name\">" . $student['name'] . "</a></td>";
     echo "<td>" . $student['fn'] . "</td>";
     echo "<td>" . $student['points'] . "</td>";
     echo "</tr>";
@@ -68,11 +68,3 @@ foreach ($locals['students'] as $key => $student) {
 ?>
   <tr>
 </table>
-
-<script>
-    (function() {
-
-    $('.info').hide();
-console.log('aaa');
-});
-</script>
