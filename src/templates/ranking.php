@@ -1,5 +1,6 @@
 <?php
 function generateOptions($options, $selectedOption) {
+    echo "<option value=\"0\">---</option>";
     foreach ($options as $key => $option) {
         if ($option == $selectedOption) {
             echo "<option value=\"$key\" selected=\"selected\">" . $option . "</option>";
@@ -12,7 +13,7 @@ function generateOptions($options, $selectedOption) {
 
 <h1>Your rankings, sir!</h1>
 
-<form name="search" action="/sas/ranking-query" method="POST">
+<form name="search" action="/sas/ranking" method="POST">
 <img src="/sas/src/public/img/glyphicons/glyphicons_263_bank.png">
 Випуск:
 <select name="class">
@@ -30,8 +31,12 @@ generateOptions($locals['specialities'], $locals['selectedSpeciality']);
 <img src="/sas/src/public/img/glyphicons/glyphicons_045_calendar.png">
 Период:
 <select name="interval">
+    <option value=\"0\">---</option>
+    <option value="day">За деня</option>
+    <option value="week">За седмицата</option>
+    <option value="month">За месеца</option>
 <?php
-generateOptions($locals['intervals'], $locals['selectedIntervals']);
+/* generateOptions($locals['intervals'], $locals['selectedIntervals']); */
 ?>
 </select>
 <input type="submit" value="Submit">
@@ -52,14 +57,22 @@ foreach ($locals['students'] as $key => $student) {
     /* } else { */
         echo "<td>" . ($key+1) . "</td>";
     /* } */
-    echo "<td>" . "" . "</td>";
-    echo "<td>" . "" . "</td>";
-    echo "<td>" . "" . "</td>";
+    echo "<td>" . $student['name'] . "</td>";
+    echo "<td>" . $student['fn'] . "</td>";
+    echo "<td>" . $student['points'] . "</td>";
     echo "</tr>";
-    echo "<tr class=\"hidden\">";
-    echo "<td collspan=\"4\">" . "He's tyhe ebst" . "</td>";
+    echo "<tr class=\"info\">";
+    echo "<td colspan=\"4\">" . "He's tyhe ebst" . "</td>";
     echo "</tr>";
 }
 ?>
   <tr>
 </table>
+
+<script>
+    (function() {
+
+    $('.info').hide();
+console.log('aaa');
+});
+</script>

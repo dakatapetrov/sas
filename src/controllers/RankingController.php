@@ -6,11 +6,25 @@ class RankingController
 {
     public function rank($criteria)
     {
+        if($_POST) {
+            if(isset($_POST['class']) && $_POST['class']) {
+                $class = $_POST['class'];
+            }
+
+            if(isset($_POST['speciality']) && $_POST['speciality']) {
+                $speciality = $_POST['speciality'];
+            }
+
+            if(isset($_POST['interval']) && $_POST['interval']) {
+                $interval = $_POST['interval'];
+            }
+        }
+
         $rankModel = new RankModel();
         $classes = $rankModel->getUniqueClasses();
         $specialities = $rankModel->getUniqueSpecialities();
 
-        $students = array(1, 2 ,3);
+        $students = $rankModel->getBestStudents($class, $speciality, $interval);
 
         return View::getInstance()->render('ranking', array('criteria' => $criteria), array('students' => $students, 'classes' => $classes, 'specialities' => $specialities));
     }
