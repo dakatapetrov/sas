@@ -1,6 +1,10 @@
 <?php
 
 $routes = array(
+    '' => array(
+        'controller' => 'UserController',
+        'method' => 'login'
+    ),
     'login' => array(
         'controller' => 'UserController',
         'method' => 'login'
