@@ -1,11 +1,23 @@
 <?php
 
 $routes = array(
-    'login' => array(
-        'controller' => 'LoginController',
+    '' => array(
+        'controller' => 'UserController',
         'method' => 'login'
     ),
+    'login' => array(
+        'controller' => 'UserController',
+        'method' => 'login'
+    ),
+    'logout' => array(
+        'controller' => 'UserController',
+        'method' => 'logout'
+    ),
     'register' => array(
+        'controller' => 'UserController',
+        'method' => 'viewUser'
+    ),
+    'user' => array(
         'controller' => 'UserController',
         'method' => 'viewUser'
     ),
