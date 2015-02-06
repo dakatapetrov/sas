@@ -1,10 +1,10 @@
 <?php
 function generateOptions($options, $selectedOption) {
-    foreach ($options as $option) {
+    foreach ($options as $key => $option) {
         if ($option == $selectedOption) {
-            echo "<option selected=\"selected\">" . $option . "</option>";
+            echo "<option value=\"$key\" selected=\"selected\">" . $option . "</option>";
         } else {
-            echo "<option>" . $option . "</option>";
+            echo "<option value=\"$key\">" . $option . "</option>";
         }
     }
 }
