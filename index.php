@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include './core/Config.php';
 include './core/View.php';
 

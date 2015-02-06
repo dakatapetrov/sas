@@ -4,29 +4,56 @@ require __DIR__ . '/../../core/Model.php';
 
 class UserModel extends Model
 {
-    public function getUserInfo($id)
+    public function getUserInfo($username)
     {
-        $id = $this->sanitize($id);
+      $username = $this->sanitize($username);
 
 
-        $query = $this->dbConnection->query(
-            'SELECT * FROM users'
-        );
+      $query = $this->dbConnection->query(
+        'SELECT * FROM users WHERE username="' . $username .'"'
+      );
 
-        if ($query->num_rows != 1) {
-            return array('success' => false, 'error' => array('no_record' => true));
-        }
-
+      if($query) {
         $data = $query->fetch_assoc();
-
-        $count_auctions = $this->dbConnection->query('
-            SELECT COUNT(*) FROM auctions WHERE user_id='.$id
-        );
-        /* $count = $count_auctions->fetch_assoc(); */
-        /* $count = $count['COUNT(*)']; */
-
-        /* $data['auctions_count'] = $count; */
-
         return array('success' => true, 'data' => $data);
+      }
+
+      return array('success' => false, 'data' => null);
+    }
+
+    public function getUserInfoById($id)
+    {
+      $id = $this->sanitize($id);
+
+
+      $query = $this->dbConnection->query(
+        'SELECT * FROM users WHERE id="' . $id .'"'
+      );
+
+      if($query) {
+        $data = $query->fetch_assoc();
+        return array('success' => true, 'data' => $data);
+      }
+
+      return array('success' => false, 'data' => null);
+    }
+
+
+    public function areCredentialsValid($username, $password)
+    {
+      $username = $this->sanitize($username);
+
+
+      $query = $this->dbConnection->query(
+        'SELECT * FROM users WHERE username="' . $username .'"'
+      );
+
+      if($query) {
+        $data = $query->fetch_assoc();
+        return $data['password'] == $password;
+
+      } else {
+        return false;
+      }
     }
 }
