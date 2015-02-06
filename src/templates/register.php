@@ -1,1 +1,4 @@
-<h1>Hello, my dear precious [@name] and [@bla]!</h1>
+<h1>Hello!</h1>
+
+<p>Name: [@first_name]</p>
+<p>Last Name: [@last_name]</p>
