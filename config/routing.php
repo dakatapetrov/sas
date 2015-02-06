@@ -13,6 +13,10 @@ $routes = array(
         'controller' => 'UserController',
         'method' => 'viewUser'
     ),
+    'user' => array(
+        'controller' => 'UserController',
+        'method' => 'viewUser'
+    ),
     'ranking' => array(
         'controller' => 'RankingController',
         'method' => 'rank'

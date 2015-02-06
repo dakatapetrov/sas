@@ -56,4 +56,26 @@ class UserModel extends Model
         return false;
       }
     }
+
+    public function getAchievements($id) {
+      $id = $this->sanitize($id);
+
+
+      $query = $this->dbConnection->query(
+        'SELECT * FROM students_achievements AS sa INNER JOIN achievements AS a ON sa.achievement_id=a.id WHERE student_id="' . $id .'"'
+      );
+
+      echo $this->dbConnection->error;
+
+      if($query) {
+        $dataArray = array();
+        while ($data = $query->fetch_assoc()) {
+          $dataArray[] = $data;
+        }
+        return array('success' => true, 'data' => $dataArray);
+      }
+
+      return array('success' => false, 'data' => null);
+
+    }
 }

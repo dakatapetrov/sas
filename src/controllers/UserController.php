@@ -7,11 +7,21 @@ class UserController
     public function viewUser($id)
     {
         $userModel = new UserModel();
-        $viewData = $userModel->getUserInfo((int)$id);
+        $viewData = $userModel->getUserInfoById((int)$id);
+        $data = $viewData['data'];
 
-        var_dump($viewData);
+        if ($data['group'] == 3) {
+          $achievementData = $userModel->getAchievements((int)$id);
+          if ($achievementData['success']) {
+            $aData = $achievementData['data'];
+          }
+        }
 
-        return View::getInstance()->render('register', $viewData['data']);
+        return View::getInstance()->render('user',
+          array('username' => $data['username'],
+          'firstName' => $data['first_name'],
+          'lastName' => $data['last_name']),
+        array('achievements' => $aData));
     }
 
     public function register($name, $bla)
