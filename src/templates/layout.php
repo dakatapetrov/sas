@@ -9,6 +9,11 @@
 
 <body>
     <div id="header">
+      <ul class="nav-fade">
+      <li><a href="">Класация</a></li>
+      <li><a href="">Сравни</a></li>
+      <li><a href="">Профил</a></li>
+      </ul>
     </div>
 
     <div id="content">

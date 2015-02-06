@@ -134,10 +134,16 @@ img {
 #header{
   position: fixed;
   top: 0;
-  height: 50px;
+  height: 100px;
   width: 100%;
   background-color: #777;
   z-index: 1;
+  font-size: 40px;
+}
+
+#header a {
+  color: #fff;
+  text-decoration: none
 }
 
 #content{
@@ -157,4 +163,15 @@ img {
   height: 50px;
   width: 100%;
   z-index: 1;
+}
+
+.nav-fade li {
+  background: #777;
+  padding: 3px 8px;
+  display: inline-block;
+  transition: background .25s ease-in-out;
+}
+
+.nav-fade li:hover {
+  background: #888;
 }
