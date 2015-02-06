@@ -57,7 +57,10 @@ foreach ($locals['students'] as $key => $student) {
     /* } else { */
         echo "<td>" . ($key+1) . "</td>";
     /* } */
-    echo "<td><a href=\"#\" class=\"name\">" . $student['name'] . "</a></td>";
+    echo "<td>" .
+      "<img src=\"/sas/src/public/img/glyphicons/glyphicons_223_chevron-up.png\" class=\"expandable\">" .
+      $student['name'] .
+      "</td>";
     echo "<td>" . $student['fn'] . "</td>";
     echo "<td>" . $student['points'] . "</td>";
     echo "</tr>";
