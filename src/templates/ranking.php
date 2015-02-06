@@ -13,24 +13,28 @@ function generateOptions($options, $selectedOption) {
 <h1>Your rankings, sir!</h1>
 
 <form name="search" action="">
+<img src="/sas/src/public/img/glyphicons/glyphicons_263_bank.png">
 Випуск:
 <select name="class">
 <?php
 generateOptions($locals['classes'], $locals['selectedClass']);
 ?>
 </select>
+<img src="/sas/src/public/img/glyphicons/glyphicons_030_pencil.png">
 Специалност:
 <select name="specialities">
 <?php
 generateOptions($locals['specialities'], $locals['selectedSpeciality']);
 ?>
 </select>
+<img src="/sas/src/public/img/glyphicons/glyphicons_045_calendar.png">
 Период:
 <select name="interval">
 <?php
 generateOptions($locals['intervals'], $locals['selectedIntervals']);
 ?>
 </select>
+<input type="submit" value="Submit">
 </form>
 
 <table id="ranking">
