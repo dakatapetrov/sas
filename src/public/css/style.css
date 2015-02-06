@@ -78,12 +78,16 @@ th {
     border-bottom: 2px solid black;
 }
 
-tr:nth-child(2n) {
-    background-color: #FEFCFF;
+tr:nth-child(3n) {
+    background-color: #ffffff;
 }
 
-tr:nth-child(2n+1) {
-    background-color: #E5E4E2;
+tr:nth-child(3n+1) {
+    background-color: #fffae3;
+}
+
+tr:nth-child(3n+2) {
+    background-color: #feffe7;
 }
 
 .bold {
