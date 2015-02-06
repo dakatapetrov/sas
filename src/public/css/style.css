@@ -65,7 +65,7 @@ h1 {
 table {
     width: 70%;
     border-collapse: collapse;
-    text-align: center;
+    text-align: left;
     margin-bottom: 40px;
 }
 
