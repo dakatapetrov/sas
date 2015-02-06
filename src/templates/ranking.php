@@ -59,9 +59,9 @@ if (isset($locals['students'])) {
     echo "<td>" . ($key+1) . "</td>";
     /* } */
     echo "<td>" .
-      "<img src=\"/sas/src/public/img/glyphicons/glyphicons_223_chevron-down.png\" class=\"expandable\">" .
+      "<img src=\"/sas/src/public/img/glyphicons/glyphicons_223_chevron-down.png\" class=\"expandable\"><a href='/sas/user/" . $student['id'] . "'>".
       $student['name'] .
-      "</td>";
+      "</a></td>";
     echo "<td>" . $student['fn'] . "</td>";
     echo "<td>" . $student['points'] . "</td>";
     echo "</tr>";

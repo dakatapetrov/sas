@@ -5,7 +5,6 @@ $(document).ready(function() {
   $('.info').hide();
 
   $('tr').on('click', function(e) {
-    e.preventDefault();
     if($(this).next().is(":visible")) {
       $(this).find('img').attr('src', imgDown);
     } else {
