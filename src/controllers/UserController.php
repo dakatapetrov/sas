@@ -49,9 +49,11 @@ class UserController
 
         $userModel = new UserModel();
         $isValid = $userModel->areCredentialsValid($username, $password);
+        $userData = $userModel->getUserInfo($username);
+        $data = $userData['data'];
 
       if ($isValid) {
-        $_SESSION['username'] = $username;
+        $_SESSION['userId'] = $data['id'];
         return View::getInstance()->render('ranking', array());
       }
 
@@ -60,7 +62,7 @@ class UserController
 
     public function logout()
     {
-      unset($_SESSION['username']);
+      unset($_SESSION['userId']);
 
       return View::getInstance()->render('login', array());
     }

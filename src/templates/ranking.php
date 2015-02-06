@@ -50,12 +50,13 @@ generateOptions($locals['specialities'], $locals['selectedSpeciality']);
     <th>Точки</th>
   </tr>
 <?php
-foreach ($locals['students'] as $key => $student) {
+if (isset($locals['students'])) {
+  foreach ($locals['students'] as $key => $student) {
     echo "<tr>";
     /* if ($key + 1 == 1) { */
     /*     echo "<td>" . ($key+1) . "<img src=\"/sas/src/public/img/glyphicons/glyphicons_049_star.png\"></td>"; */
     /* } else { */
-        echo "<td>" . ($key+1) . "</td>";
+    echo "<td>" . ($key+1) . "</td>";
     /* } */
     echo "<td>" .
       "<img src=\"/sas/src/public/img/glyphicons/glyphicons_223_chevron-down.png\" class=\"expandable\">" .
@@ -67,6 +68,7 @@ foreach ($locals['students'] as $key => $student) {
     echo "<tr class=\"info\">";
     echo "<td colspan=\"4\">" . "He's tyhe ebst" . "</td>";
     echo "</tr>";
+  }
 }
 ?>
   <tr>

@@ -62,7 +62,7 @@ class UserModel extends Model
 
 
       $query = $this->dbConnection->query(
-        'SELECT * FROM students_achievements AS sa INNER JOIN achievements AS a ON sa.achievement_id=a.id WHERE student_id="' . $id .'"'
+        'SELECT sa.points, a.name, sa.date  FROM students_achievements AS sa INNER JOIN achievements AS a ON sa.achievement_id=a.id WHERE student_id="' . $id .'"'
       );
 
       echo $this->dbConnection->error;
