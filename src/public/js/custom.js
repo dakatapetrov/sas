@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var imgUp = '/sas/src/public/img/glyphicons/glyphicons_223_chevron-up.png';
+  var imgUp   = '/sas/src/public/img/glyphicons/glyphicons_223_chevron-up.png';
   var imgDown = '/sas/src/public/img/glyphicons/glyphicons_223_chevron-down.png';
 
   $('.info').hide();

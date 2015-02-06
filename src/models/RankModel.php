@@ -49,12 +49,14 @@ class RankModel extends Model
     {
         $whereCondition = false;
 
-        $sql = 'SELECT s.user_id, s.fn, u.first_name, u.last_name, SUM(points) as points
+        $sql = 'SELECT s.user_id, s.fn, s.flow, s.group, s.class, sp.name as speciality, u.first_name, u.last_name, SUM(points) as points
                 FROM students_achievements AS sa
                 INNER JOIN students AS s
                 ON sa.student_id = s.user_id
                 INNER JOIN users AS u
-                ON s.user_id = u.id';
+                ON s.user_id = u.id
+                INNER JOIN specialities AS sp
+                ON s.speciality_id = sp.id';
 
         if($class) {
             $whereCondition = true;
@@ -83,11 +85,15 @@ class RankModel extends Model
 
         $data = array();
         while ($line = $query->fetch_assoc()) {
-            $student = array();
-            $student['id'] = $line['user_id'];
-            $student['fn'] = $line['fn'];
-            $student['name'] = $line['first_name'] . ' ' . $line['last_name'];
-            $student['points'] = $line['points'];
+            $student               = array();
+            $student['id']         = $line['user_id'];
+            $student['fn']         = $line['fn'];
+            $student['flow']       = $line['flow'];
+            $student['group']      = $line['group'];
+            $student['class']      = $line['class'];
+            $student['speciality'] = $line['speciality'];
+            $student['name']       = $line['first_name'] . ' ' . $line['last_name'];
+            $student['points']     = $line['points'];
             $data[] = $student;
         }
 
@@ -98,25 +104,141 @@ class RankModel extends Model
     {
         $id = $this->sanitize($id);
 
-
         $query = $this->dbConnection->query(
-            'SELECT * FROM users'
+            'SELECT * FROM users u, students s
+             WHERE u.id='.$id.' AND s.user_id='.$id
         );
-
-        if ($query->num_rows != 1) {
-            return array('success' => false, 'error' => array('no_record' => true));
-        }
 
         $data = $query->fetch_assoc();
 
-        $count_auctions = $this->dbConnection->query('
-            SELECT COUNT(*) FROM auctions WHERE user_id='.$id
+        return $data;
+    }
+
+    public function findPointsForUser($id)
+    {
+        $sql = 'SELECT SUM(points) as points
+                FROM students_achievements WHERE student_id='.$id;
+
+        $query = $this->dbConnection->query(
+            $sql
         );
-        /* $count = $count_auctions->fetch_assoc(); */
-        /* $count = $count['COUNT(*)']; */
 
-        /* $data['auctions_count'] = $count; */
+        $data = $query->fetch_assoc();
 
-        return array('success' => true, 'data' => $data);
+        return $data['points'];
+    }
+
+    public function findPlaces($id)
+    {
+        $student = $this->getUserInfo($id);
+        $points = $this->findPointsForUser($id);
+        $result = array();
+
+        //Class
+        $sql = 'SELECT COUNT(DISTINCT(s.user_id)) as count
+                FROM students_achievements AS sa
+                INNER JOIN students AS s
+                ON sa.student_id = s.user_id
+                WHERE s.class="'.$student['class'] . '"
+                GROUP BY user_id HAVING SUM(points) > '.$points;
+
+        $query = $this->dbConnection->query($sql);
+
+        $count = 0;
+        if($query) {
+            while ($line = $query->fetch_assoc()) {
+                $count++;
+            }
+
+            $result['class']['before'] = $count;
+        }
+
+        $sql = 'SELECT COUNT(*) as count FROM students
+                WHERE class="'.$student['class'].'"';
+
+        $query = $this->dbConnection->query($sql);
+
+        $count = 0;
+        if($query) {
+            $count = $query->fetch_assoc()['count'];
+
+        }
+
+        $result['class']['all'] = $count;
+
+        //Flow
+        $sql = 'SELECT COUNT(DISTINCT(s.user_id)) as count
+                FROM students_achievements AS sa
+                INNER JOIN students AS s
+                ON sa.student_id = s.user_id
+                WHERE s.class="'.$student['class'] . '"
+                AND s.flow ="'.$student['flow'] . '"
+                GROUP BY user_id HAVING SUM(points) > '.$points;
+
+        $query = $this->dbConnection->query($sql);
+
+        $count = 0;
+        if($query) {
+            while ($line = $query->fetch_assoc()) {
+                $count++;
+            }
+
+            $result['flow']['before'] = $count;
+        }
+
+        $sql = 'SELECT COUNT(*) as count FROM students
+                WHERE class="'.$student['class'].'" AND flow="' . $student['flow'] . '"';
+
+        $query = $this->dbConnection->query($sql);
+
+        $count = 0;
+        if($query) {
+            $count = $query->fetch_assoc()['count'];
+
+        }
+
+        $result['flow']['all'] = $count;
+
+        //Groups
+        /* $sql = 'SELECT COUNT(DISTINCT(s.user_id)) as count */
+        /*         FROM students_achievements AS sa */
+        /*         INNER JOIN students AS s */
+        /*         ON sa.student_id = s.user_id */
+        /*         WHERE s.class="'.$student['class'] . '" */
+        /*         AND s.flow ="'.$student['flow'] . '" */
+        /*         AND s.group ="'.$student['group'] . '" */
+        /*         GROUP BY user_id HAVING SUM(points) > '.$points; */
+
+        /* $query = $this->dbConnection->query($sql); */
+
+        /* $count = 0; */
+        /* if($query) { */
+        /*     while ($line = $query->fetch_assoc()) { */
+        /*         $count++; */
+        /*     } */
+
+        /*     $result['group']['before'] = $count; */
+        /* } */
+
+        /* $sql = 'SELECT COUNT(*) as count FROM students */
+        /*         WHERE (class="'.$student['class'].'" AND group="' . $student['group'] . '" AND flow="' . $student['flow'] . '")'; */
+
+        /* var_dump($sql); */
+
+        /* $query = $this->dbConnection->query($sql); */
+
+        /* echo $this->dbConnection->error; */
+        /* die(); */
+
+
+        /* $count = 0; */
+        /* if($query) { */
+        /*     $count = $query->fetch_assoc()['count']; */
+
+        /* } */
+
+        /* $result['group']['all'] = $count; */
+
+        return $result;
     }
 }

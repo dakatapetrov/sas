@@ -65,7 +65,18 @@ foreach ($locals['students'] as $key => $student) {
     echo "<td>" . $student['points'] . "</td>";
     echo "</tr>";
     echo "<tr class=\"info\">";
-    echo "<td colspan=\"4\">" . "He's tyhe ebst" . "</td>";
+    echo "<td></td>";
+    echo "<td colspan=\"3\">";
+    echo "<p>" . $student['name'] . ' - спец. ' . $student['speciality'] . ', поток ' .
+         $student['flow'] . ', група ' . $student['group'] . ', випуск ' . $student['class'] . "</p>";
+
+    $place = $locals['results'][$student['id']]['class'];
+    echo "<p>На " . ($place['before'] + 1) . " място във випуска от общо " .$place['all'] . " студенти.</p>";
+    $place = $locals['results'][$student['id']]['flow'];
+    echo "<p>На " . ($place['before'] + 1) . " място в потока от общо " .$place['all'] . " студенти.</p>";
+
+
+    echo "</td>";
     echo "</tr>";
 }
 ?>

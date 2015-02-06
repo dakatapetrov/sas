@@ -23,10 +23,14 @@ class RankingController
         $rankModel = new RankModel();
         $classes = $rankModel->getUniqueClasses();
         $specialities = $rankModel->getUniqueSpecialities();
-
         $students = $rankModel->getBestStudents($class, $speciality, $interval);
 
-        return View::getInstance()->render('ranking', array('criteria' => $criteria), array('students' => $students, 'classes' => $classes, 'specialities' => $specialities));
+        $places = array();
+        foreach($students as $student) {
+            $results[$student['id']] = $rankModel->findPlaces($student['id']);
+        }
+
+        return View::getInstance()->render('ranking', array('criteria' => $criteria), array('students' => $students, 'classes' => $classes, 'specialities' => $specialities, 'results' => $results));
     }
 
     public function rankQuery($criteria)
