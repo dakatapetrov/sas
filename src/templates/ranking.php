@@ -12,7 +12,7 @@ function generateOptions($options, $selectedOption) {
 
 <h1>Your rankings, sir!</h1>
 
-<form name="search" action="">
+<form name="search" action="/sas/ranking-query" method="POST">
 <img src="/sas/src/public/img/glyphicons/glyphicons_263_bank.png">
 Випуск:
 <select name="class">
@@ -22,7 +22,7 @@ generateOptions($locals['classes'], $locals['selectedClass']);
 </select>
 <img src="/sas/src/public/img/glyphicons/glyphicons_030_pencil.png">
 Специалност:
-<select name="specialities">
+<select name="speciality">
 <?php
 generateOptions($locals['specialities'], $locals['selectedSpeciality']);
 ?>
@@ -47,7 +47,11 @@ generateOptions($locals['intervals'], $locals['selectedIntervals']);
 <?php
 foreach ($locals['students'] as $key => $student) {
     echo "<tr>";
-    echo "<td>" . ($key+1) . "</td>";
+    /* if ($key + 1 == 1) { */
+    /*     echo "<td>" . ($key+1) . "<img src=\"/sas/src/public/img/glyphicons/glyphicons_049_star.png\"></td>"; */
+    /* } else { */
+        echo "<td>" . ($key+1) . "</td>";
+    /* } */
     echo "<td>" . "" . "</td>";
     echo "<td>" . "" . "</td>";
     echo "<td>" . "" . "</td>";
