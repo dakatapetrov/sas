@@ -95,6 +95,10 @@ tr:nth-child(4n+5) {
     background-color: #ffffff;
 }
 
+tr img {
+    margin-right: 50px;
+}
+
 .bold {
     font-weight: bold;
 }
