@@ -26,7 +26,7 @@ class Config
 
     public function getParameter($parameter)
     {
-        return $this->paramters[$parameter];
+        return $this->parameters[$parameter];
     }
 
     public function getRoute($route)
