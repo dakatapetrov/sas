@@ -8,8 +8,14 @@
 </head>
 
 <body>
-    <div>
+    <div id="header">
+    </div>
+
+    <div id="content">
         [@content]
+    </div>
+
+    <div id="footer">
     </div>
 </body>
 </html>
