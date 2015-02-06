@@ -6,7 +6,7 @@ class View
     private $template;
     private $viewData;
 
-    private function prepareTemplate($template, $data)
+    private function prepareTemplate($template, $data, $locals)
     {
         $templateFile = __DIR__ . '/../src/templates/' . $template . '.php';
 
@@ -20,14 +20,16 @@ class View
         ob_end_clean();
 
         foreach ($data as $key => $value) {
-            $tagToReplace = "[@$key]";
-            $content = str_replace($tagToReplace, $value, $content);
+            if (!is_array($value)) {
+                $tagToReplace = "[@$key]";
+                $content = str_replace($tagToReplace, $value, $content);
+            }
         }
 
         return $content;
     }
 
-    public function render($template, $data = array())
+    public function render($template, $data = array(), $locals = array())
     {
         //TODO check if data is correct
         /* if (is_array($data)) { */
@@ -35,9 +37,9 @@ class View
         /* } */
         /* include '../views/' . $template . '.php'; */
 
-        $content = $this->prepareTemplate($template, $data);
+        $content = $this->prepareTemplate($template, $data, $locals);
 
-        echo $this->prepareTemplate('layout', array('content' => $content));
+        echo $this->prepareTemplate('layout', array('content' => $content), $locals);
 
     }
 
