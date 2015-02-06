@@ -13,4 +13,8 @@ $routes = array(
         'controller' => 'RankingController',
         'method' => 'rank'
     ),
+    'ranking-query' => array(
+        'controller' => 'RankingController',
+        'method' => 'rankQuery'
+    ),
 );
