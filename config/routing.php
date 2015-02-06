@@ -7,6 +7,10 @@ $routes = array(
     ),
     'register' => array(
         'controller' => 'UserController',
-        'method' => 'register'
+        'method' => 'viewUser'
+    ),
+    'ranking' => array(
+        'controller' => 'RankingController',
+        'method' => 'rank'
     ),
 );
